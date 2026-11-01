@@ -59,8 +59,8 @@ class DamianaSeeder extends Seeder
                 'recipient_emails' => ['ines.damjanovic7@gmail.com'],
                 'send_confirmation_email' => true,
                 'confirmation_email_subject' => [
-                    'en' => 'We received your tattoo inquiry • DamianaInkArt',
-                    'sr' => 'Vaš upit za tetovažu je primljen • DamianaInkArt',
+                    'en' => 'We received your tattoo inquiry!',
+                    'sr' => 'Vaš upit za tetovažu je primljen!',
                 ],
                 'confirmation_email_body' => [
                     'en' => '<p>Thank you for reaching out! We received your concept and will get back to you with availability and details.</p>',

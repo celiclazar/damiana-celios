@@ -1,22 +1,20 @@
 @php
-    $slides = $data['images'] ?? $data['slides'] ?? null;
-    
-    // Background image from Curator if assigned
-    $imageId = $data['background_image_id'] ?? null;
-    if ($imageId && empty($slides)) {
-        $mediaClass = config('curator.model', \Awcodes\Curator\Models\Media::class);
-        $media = $mediaClass::find($imageId);
-        if ($media) {
-            $slides = [$media->url ?? $media->signedUrl];
-        }
-    }
+    $slides = [];
 
-    if (empty($slides)) {
-        $slides = [
-            'https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=1600&q=80',
-            'https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=1600&q=80',
-            'https://images.unsplash.com/photo-1562962230-16e4623d36e6?auto=format&fit=crop&w=1600&q=80'
-        ];
+    // Resolve selected image(s) from Curator (background_image_id or images)
+    $rawIds = $data['background_image_id'] ?? $data['images'] ?? [];
+    if (!empty($rawIds)) {
+        $ids = (array) $rawIds;
+        $mediaClass = config('curator.model', \App\Models\Media::class);
+        $mediaRecords = $mediaClass::whereIn('id', $ids)->get();
+
+        // Preserve exact selection order from Filament
+        foreach ($ids as $id) {
+            $m = $mediaRecords->firstWhere('id', $id);
+            if ($m && ($m->url ?? $m->signedUrl)) {
+                $slides[] = $m->url ?? $m->signedUrl;
+            }
+        }
     }
 @endphp
 

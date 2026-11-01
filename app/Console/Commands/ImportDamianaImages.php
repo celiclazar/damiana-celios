@@ -124,14 +124,42 @@ class ImportDamianaImages extends Command
             $this->info("Imported author portrait media: {$aboutPath}");
         }
 
-        // Import Hero header slides
-        $heroSlides = [
-            '/storage/background/image_header_section/6ZOxmIHhCLIfXfaRyxd4.webp',
-            '/storage/background/image_header_section/PJ6JWWcUh3X7Vk0ueIwZ.webp',
-            '/storage/background/image_header_section/Yhq7HKyaMgA35UQWWmin.webp',
-            '/storage/background/image_header_section/aO1mPG8RFA8zL2Q6zO3w.webp',
-            '/storage/background/image_header_section/home_background.jpg',
+        // Import Hero header slides into Curator Media
+        $heroSlidePaths = [
+            'background/image_header_section/6ZOxmIHhCLIfXfaRyxd4.webp',
+            'background/image_header_section/PJ6JWWcUh3X7Vk0ueIwZ.webp',
+            'background/image_header_section/Yhq7HKyaMgA35UQWWmin.webp',
+            'background/image_header_section/aO1mPG8RFA8zL2Q6zO3w.webp',
+            'background/image_header_section/home_background.jpg',
         ];
+
+        $heroMediaUuids = [];
+        foreach ($heroSlidePaths as $idx => $heroPath) {
+            $fullHeroPath = storage_path("app/public/{$heroPath}");
+            $ext = strtolower(pathinfo($heroPath, PATHINFO_EXTENSION) ?: 'webp');
+            $mime = ($ext === 'jpg' || $ext === 'jpeg') ? 'image/jpeg' : 'image/webp';
+            $heroSize = File::exists($fullHeroPath) ? @getimagesize($fullHeroPath) : null;
+
+            $heroMedia = Media::updateOrCreate(
+                ['path' => $heroPath],
+                [
+                    'disk' => 'public',
+                    'directory' => 'background/image_header_section',
+                    'visibility' => 'public',
+                    'name' => 'hero-slide-' . ($idx + 1),
+                    'width' => $heroSize ? $heroSize[0] : 1920,
+                    'height' => $heroSize ? $heroSize[1] : 1080,
+                    'size' => File::exists($fullHeroPath) ? File::size($fullHeroPath) : 200000,
+                    'type' => $mime,
+                    'ext' => $ext,
+                    'alt' => 'DamianaInkArt Hero Slide ' . ($idx + 1),
+                    'title' => 'Hero Slide ' . ($idx + 1),
+                    'description' => 'Homepage hero background image ' . ($idx + 1),
+                    'caption' => 'hero',
+                ]
+            );
+            $heroMediaUuids[] = (string) $heroMedia->id;
+        }
 
         // -------------------------------------------------------------
         // Update Page #5 (Gallery Full Page)
@@ -157,7 +185,8 @@ class ImportDamianaImages extends Command
             $content = $homePage->content ?: [];
             foreach ($content as &$block) {
                 if ($block['type'] === 'hero_section') {
-                    $block['data']['slides'] = $heroSlides;
+                    $block['data']['background_image_id'] = $heroMediaUuids;
+                    unset($block['data']['slides']);
                 }
                 if ($block['type'] === 'author_bio') {
                     $block['data']['avatar_url'] = '/storage/background/aboutCircle_oWy7g.webp';
