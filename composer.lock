@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "61b09180e7e22fecae32e06a200c743f",
+    "content-hash": "a134f1a10d2f64f891532c4e5064fccc",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -704,11 +704,17 @@
         },
         {
             "name": "celios/core",
-            "version": "dev-master",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/celiclazar/celios-core.git",
+                "reference": "e5f12bf9f802e44a21cf5c5174cb30f83eaf8503"
+            },
             "dist": {
-                "type": "path",
-                "url": "../celios/packages/core",
-                "reference": "855c50e820008046f058fbd28257e3a9abf88eb0"
+                "type": "zip",
+                "url": "https://api.github.com/repos/celiclazar/celios-core/zipball/e5f12bf9f802e44a21cf5c5174cb30f83eaf8503",
+                "reference": "e5f12bf9f802e44a21cf5c5174cb30f83eaf8503",
+                "shasum": ""
             },
             "require": {
                 "awcodes/filament-curator": "^5.0",
@@ -756,18 +762,21 @@
                 }
             ],
             "description": "Core engine, multilingual routing, and administration platform for Celios CMS.",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "time": "2026-11-01T10:53:35+00:00"
         },
         {
             "name": "celios/crm",
-            "version": "dev-master",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/celiclazar/celios-crm.git",
+                "reference": "aa26e9ea798d4f75d8808ed476efc93557680df3"
+            },
             "dist": {
-                "type": "path",
-                "url": "../celios/packages/crm",
-                "reference": "d8451875e145712f031f93101ad2d5ce1b0d59f3"
+                "type": "zip",
+                "url": "https://api.github.com/repos/celiclazar/celios-crm/zipball/aa26e9ea798d4f75d8808ed476efc93557680df3",
+                "reference": "aa26e9ea798d4f75d8808ed476efc93557680df3",
+                "shasum": ""
             },
             "require": {
                 "illuminate/support": "^11.0|^12.0|^13.0",
@@ -796,18 +805,21 @@
                 }
             ],
             "description": "Modular, pluggable CRM engine for Celios CMS supporting local management and third-party CRM drivers.",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "time": "2026-10-12T19:45:15+00:00"
         },
         {
             "name": "celios/payment",
-            "version": "dev-master",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/celiclazar/celios-payment.git",
+                "reference": "303fc1eea0d8f9ee366ae76ddedc334c23b7a5b9"
+            },
             "dist": {
-                "type": "path",
-                "url": "../celios/packages/payment",
-                "reference": "ee02c5e4c0cb387a2d5c4e2ef57e7409b026eec6"
+                "type": "zip",
+                "url": "https://api.github.com/repos/celiclazar/celios-payment/zipball/303fc1eea0d8f9ee366ae76ddedc334c23b7a5b9",
+                "reference": "303fc1eea0d8f9ee366ae76ddedc334c23b7a5b9",
+                "shasum": ""
             },
             "require": {
                 "illuminate/support": "^11.0|^12.0|^13.0",
@@ -836,10 +848,7 @@
                 }
             ],
             "description": "Pluggable payment engine for Celios CMS supporting Stripe, PayPal, Mollie, and Bank Wire Transfer.",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "time": "2026-10-05T19:06:33+00:00"
         },
         {
             "name": "chillerlan/php-qrcode",

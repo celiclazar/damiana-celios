@@ -7,27 +7,6 @@
     "license": "MIT",
     "repositories": [
         {
-            "type": "path",
-            "url": "../celios/packages/core",
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "../celios/packages/payment",
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "../celios/packages/crm",
-            "options": {
-                "symlink": true
-            }
-        },
-        {
             "type": "vcs",
             "url": "https://github.com/celiclazar/celios-core.git",
             "no-api": true
@@ -45,9 +24,9 @@
     ],
     "require": {
         "php": "^8.3",
-        "celios/core": "*",
-        "celios/crm": "*",
-        "celios/payment": "*",
+        "celios/core": "^1.0",
+        "celios/payment": "^1.0",
+        "celios/crm": "^1.0",
         "filament/filament": "^5.4",
         "laravel/framework": "^13.0",
         "laravel/tinker": "^3.0",
