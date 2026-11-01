@@ -157,7 +157,7 @@
                         <img src="{{ $image['url'] }}" 
                              alt="{{ $image['alt'] ?? 'Gallery preview' }}" 
                              loading="lazy"
-                             class="w-full aspect-[4/5] object-cover transform transition duration-500 hover:scale-110 rounded-2xl grayscale">
+                             class="w-full h-auto transform transition duration-500 hover:scale-110 rounded-2xl grayscale">
                     </div>
                 @endforeach
             </div>
