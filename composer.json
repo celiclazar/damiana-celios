@@ -1,0 +1,141 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "celios/starter",
+    "type": "project",
+    "description": "Celios CMS Starter Project - Clean base application skeleton for client websites.",
+    "keywords": ["celios", "cms", "laravel", "filament"],
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../celios/packages/core",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../celios/packages/payment",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../celios/packages/crm",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/celiclazar/celios-core.git",
+            "no-api": true
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/celiclazar/celios-payment.git",
+            "no-api": true
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/celiclazar/celios-crm.git",
+            "no-api": true
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "celios/core": "*",
+        "celios/crm": "*",
+        "celios/payment": "*",
+        "filament/filament": "^5.4",
+        "laravel/framework": "^13.0",
+        "laravel/tinker": "^3.0",
+        "resend/resend-php": "^1.17",
+        "spatie/laravel-activitylog": "^4.12"
+    },
+    "conflict": {
+        "symfony/symfony": ">=8.0",
+        "symfony/var-dumper": ">=8.0",
+        "symfony/console": ">=8.0",
+        "symfony/http-kernel": ">=8.0",
+        "symfony/routing": ">=8.0",
+        "symfony/error-handler": ">=8.0",
+        "symfony/event-dispatcher": ">=8.0",
+        "symfony/finder": ">=8.0",
+        "symfony/html-sanitizer": ">=8.0",
+        "symfony/mailer": ">=8.0",
+        "symfony/mime": ">=8.0",
+        "symfony/process": ">=8.0",
+        "symfony/string": ">=8.0",
+        "symfony/translation": ">=8.0",
+        "symfony/uid": ">=8.0",
+        "symfony/clock": ">=8.0",
+        "symfony/css-selector": ">=8.0",
+        "symfony/http-foundation": ">=8.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "laravel/pint": "^1.27",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.6",
+        "phpunit/phpunit": "^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "setup": [
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php artisan celios:install --migrate --force",
+            "npm install",
+            "npm run build"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "8.3.33"
+        },
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

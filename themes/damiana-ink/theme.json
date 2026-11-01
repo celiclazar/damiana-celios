@@ -1,0 +1,12 @@
+{
+  "id": "damiana-ink",
+  "name": "Damiana InkArt Studio",
+  "version": "1.0.0",
+  "author": "Celic Lazar",
+  "description": "Dark aesthetic, high-contrast tattoo studio theme with bespoke navigation overlay, gallery lightbox, and appointment booking.",
+  "menu_locations": {
+    "primary": "Header Navigation",
+    "footer": "Main Footer Links",
+    "footer_legal": "Legal & Terms"
+  }
+}
